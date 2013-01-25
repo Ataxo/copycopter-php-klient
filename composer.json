@@ -1,0 +1,15 @@
+{
+	"name": "Ataxo/copycopter-php-client",
+	"description": "Nette Translator library for loading translates from copycopter.",
+	"keywords": ["nette", "translator", "copycopter"],
+	"license": ["LGPL"],
+	"authors": [
+		{
+			"name": "Ondrej Podolinský @ ataxointeractive.com"
+		}
+	],
+	"require": {
+		"php": ">= 5.3.0",
+		"nette/nette": ">= 2.0.0"
+	}
+}
