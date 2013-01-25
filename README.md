@@ -19,7 +19,7 @@ common:
 		translator: Translator(%copycopterApiKey%)
 ```
 
-In PHP BasePresenter.php:
+In BasePresenter.php:
 
 ```
 startup(){

@@ -1,5 +1,5 @@
 {
-	"name": "Ataxo/copycopter-php-client",
+	"name": "ataxo/copycopter-php-client",
 	"description": "Nette Translator library for loading translates from copycopter.",
 	"keywords": ["nette", "translator", "copycopter"],
 	"license": ["LGPL"],
