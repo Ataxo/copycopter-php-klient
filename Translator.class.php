@@ -70,6 +70,8 @@ Class Translator implements  \Nette\Localization\ITranslator
      * @return string
      */
     public function translate($message, $count = null){
+        $parameters = func_get_args();
+
         if(count(self::$translates) == 0)
             self::$translates = self::loadTranslates();
 
@@ -83,6 +85,11 @@ Class Translator implements  \Nette\Localization\ITranslator
         //if string is default empty (string is in copycopter and it is not translated), it is filled by translate key
         if($translate == '')
             $translate = $message;
+
+        if (count($parameters)>1) {
+            array_shift($parameters);
+            $translate = vsprintf($translate, $parameters); //added variables into translate
+        }
         return $translate;
     }
     /**
