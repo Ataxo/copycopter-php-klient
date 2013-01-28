@@ -80,7 +80,7 @@ Class Translator implements  \Nette\Localization\ITranslator
             self::addNewPhraseToCache($message);
             $translate = $message;
         }
-        //pokud jeste neni prelozena fraze, tak je v prekladu pro jiny jazyk nez byl pri prvnim ulozeni nastaven vychozi text
+        //if string is default empty (string is in copycopter and it is not translated), it is filled by translate key
         if($translate == '')
             $translate = $message;
         return $translate;
