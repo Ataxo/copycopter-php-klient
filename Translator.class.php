@@ -75,8 +75,17 @@ Class Translator implements  \Nette\Localization\ITranslator
         if(count(self::$translates) == 0)
             self::$translates = self::loadTranslates();
 
-        if(array_key_exists($message,self::$translates[self::$lang]))
-            $translate = self::$translates[self::$lang][$message];
+        //if language is available
+        if(array_key_exists(self::$lang,self::$translates)){
+            //if translate key is available
+            if(array_key_exists($message,self::$translates[self::$lang]))
+                $translate = self::$translates[self::$lang][$message];
+            else{
+                self::sendNewPhrase($message);
+                self::addNewPhraseToCache($message);
+                $translate = $message;
+            }
+        }
         else{
             self::sendNewPhrase($message);
             self::addNewPhraseToCache($message);
