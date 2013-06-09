@@ -12,6 +12,10 @@ use Nette\Caching\Cache,
 function t($message){
     return \Translator::getInstance()->translate($message);
 }
+//substituting function for gettext translate in php _()
+function tt($message){
+    return \Translator::getInstance()->translate(ucfirst(BasePresenter::$taxonomy).' '.$message);
+}
 Class Translator implements  \Nette\Localization\ITranslator
 {
     //apiKey for app detection
@@ -71,6 +75,7 @@ Class Translator implements  \Nette\Localization\ITranslator
      */
     public function translate($message, $count = null){
         $parameters = func_get_args();
+        $message = trim($message);//remove whitespaces
 
         if(count(self::$translates) == 0)
             self::$translates = self::loadTranslates();
@@ -119,7 +124,7 @@ Class Translator implements  \Nette\Localization\ITranslator
 
                 $translates = self::refactorTranslatesBase($translatesBase);
                 //save cache
-                $storage->write('translates',$translates,array(\Nette\Caching\Cache::EXPIRATION => 3600));
+                $storage->write('translates',$translates,array(\Nette\Caching\Cache::EXPIRATION => 300));
                 $storage->write('translatesBackup',array(0 => $translates),array(\Nette\Caching\Cache::EXPIRATION => 3600*24*7));
             }
             catch(Exception $e){
@@ -174,7 +179,7 @@ Class Translator implements  \Nette\Localization\ITranslator
         $translates[self::$lang][$message] = $message;
 
         self::$translates[self::$lang][$message] = $message;
-        $storage->write('translates',$translates,array(\Nette\Caching\Cache::EXPIRATION => 3600));
+        $storage->write('translates',$translates,array(\Nette\Caching\Cache::EXPIRATION => 300));
         $storage->write('translatesBackup',array(0 => $translates),array(\Nette\Caching\Cache::EXPIRATION => 3600));
         return true;
     }
